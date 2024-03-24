@@ -13,13 +13,80 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Background="#FF77ABFF">
-            
-        </StackPanel>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2.2*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="0" Background="#FF5D9DD8">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Margin="5 0">
+                        <TextBox x:Name="tbIP" Width="250" Height="40" Margin="0 20" Background="#FF1D1C1C"
+                            Padding="10 0 40 5"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="14"
+                            materialDesign:TextFieldAssist.UnderlineBrush="White"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="12"
+                            CaretBrush="White">
+                            <materialDesign:HintAssist.Hint>
+                                <TextBlock Text="Enter your IP" Margin="5 -3 0 0" VerticalAlignment="Center" Foreground="White"/>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+
+                        <TextBox x:Name="tbPort" Width="250" Height="40" Background="#FF1D1C1C"
+                            Padding="10 0 40 5"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="14"
+                            materialDesign:TextFieldAssist.UnderlineBrush="White"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="12"
+                            CaretBrush="White">
+                            <materialDesign:HintAssist.Hint>
+                                <TextBlock Text="Enter your Port" Margin="5 -3 0 0" VerticalAlignment="Center" Foreground="White"/>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                    </StackPanel>
+                    <Button Height="30" Width="100" Margin="15 35 0 0" Content="Join" Foreground="White" FontSize="16" FontWeight="DemiBold"
+                        Background="DarkRed" BorderBrush="Black" BorderThickness="2" Command="{Binding JoinCommand}" Padding="0 0 0 4" 
+                        materialDesign:ButtonAssist.CornerRadius="5">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Background="Black">
+                <ScrollViewer Width="390" Height="320" Background="Black" >
+                    <ListBox x:Name="myListBox" ItemsSource="{Binding UserMessages}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel Orientation="Vertical" Background="#FF1D1C1C">
+                                        <TextBlock Text="{Binding Acceptorname}" Foreground="Gold" FontWeight="DemiBold" Margin="5 2" Padding="5"/>
+                                        <TextBlock Text="{Binding UserMessage}" Foreground="White" TextWrapping="Wrap" TextAlignment="Justify" Padding="5"/>
+                                        <TextBlock Text="{Binding Created}" Foreground="White" Margin="220 -5 2 2" Padding="5 2"/>
+                                    </StackPanel>
+                                    
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
 
         <StackPanel Grid.Column="1" Orientation="Vertical" Background="#FF92BAFB">
-            <TextBox x:Name="tbname" Width="300" Height="40" Margin="0 30" Background="#FF1D1C1C"
-                Padding="10 0 40 5"
+            <TextBox x:Name="tbname1" Width="300" Height="40" Margin="0 10" Background="#FF1D1C1C" Padding="10 0 40 5"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Foreground="White"
                 BorderThickness="0"
@@ -29,11 +96,25 @@
                 materialDesign:TextFieldAssist.TextFieldCornerRadius="12"
                 CaretBrush="White">
                 <materialDesign:HintAssist.Hint>
-                    <TextBlock x:Name="myName" Text="Enter acceptor name" Margin="5 -3 0 0" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Enter your name" Margin="5 -3 0 0" VerticalAlignment="Center" Foreground="White"/>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
+            
+            <TextBox x:Name="tbname2" Width="300" Height="40" Margin="0 10 0 20" Background="#FF1D1C1C" Padding="10 0 40 5"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Foreground="White"
+                BorderThickness="0"
+                FontSize="14"
+                materialDesign:TextFieldAssist.UnderlineBrush="White"
+                materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                materialDesign:TextFieldAssist.TextFieldCornerRadius="12"
+                CaretBrush="White">
+                <materialDesign:HintAssist.Hint>
+                    <TextBlock Text="Enter acceptor name" Margin="5 -3 0 0" VerticalAlignment="Center" Foreground="White"/>
                 </materialDesign:HintAssist.Hint>
             </TextBox>
 
-            <RichTextBox x:Name="tbMessage" Width="300" Height="300" Background="#FF1D1C1C" Padding="10"
+            <RichTextBox x:Name="tbMessage" Width="300" Height="260" Background="#FF1D1C1C" Padding="10"
                 Foreground="White"
                 BorderThickness="0" FontSize="14"
                 materialDesign:TextFieldAssist.UnderlineBrush="White"
@@ -41,12 +122,12 @@
                 materialDesign:TextFieldAssist.TextFieldCornerRadius="12"
                 CaretBrush="White">
                 <materialDesign:HintAssist.Hint>
-                    <TextBlock x:Name="myMessage" Text="Enter your message" Margin="0 -265 0 0" VerticalAlignment="Center" 
+                    <TextBlock Text="Enter your message" Margin="0 -225 0 0" VerticalAlignment="Center" 
                                Foreground="White" />
                 </materialDesign:HintAssist.Hint>
             </RichTextBox>
             
-            <Button Height="30" Width="100" Margin="5 20 0 0" Content="Send" Foreground="White" FontSize="16" FontWeight="DemiBold"
+            <Button Height="30" Width="100" Margin="0 20 0 0" Content="Send" Foreground="White" FontSize="16" FontWeight="DemiBold"
                 Background="DarkRed" BorderBrush="Black" BorderThickness="2" Command="{Binding SendCommand}" Padding="0 0 0 4" 
                 materialDesign:ButtonAssist.CornerRadius="5">
             </Button>
